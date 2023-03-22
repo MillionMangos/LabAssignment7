@@ -1,22 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
+int swapTotalIteration;
 
-void newBubbleSort(int *pData, int *swapData, int n)
+void newBubbleSort(int *pData, int n)
 {
 	int i, j, temp;
+    printf("\n");
 	for(i = 0; i < n-1; i++)
 	{
 		for(j = 0; j < n-i-1; j++)
 		{
 			if(pData[j] > pData[j+1])
 			{
+            swapTotalIteration++;
 			temp = pData[j];
 			pData[j] = pData[j+1];
 			pData[j+1] = temp;
-            swapData[j] += 1;
-            swapData[j+1] += 1;
 			}
 		}
+        printf("Swaps for Iteration %d: %d\n",i, swapTotalIteration);
+        swapTotalIteration = 0;
 	}
 }
 
@@ -42,8 +45,8 @@ int main()
         printf("%d, ", originalArray[i]);
         
     }
-    newBubbleSort(p,sw, n);
-    printf("\nNewArray:\n");
+    newBubbleSort(p, n);
+    printf("NewArray:\n");
     for(int i = 0; i < n; i++)
     {
         if(i+1 == n)
@@ -52,10 +55,5 @@ int main()
             break;
         }
         printf("%d, ", originalArray[i]);
-    }
-    printf("\nSwapsPerIndex:\n");
-    for(int i = 0; i < n; i++)
-    {
-        printf("Index %d: %d\n", i, swapArray[i]);
     }
 }
